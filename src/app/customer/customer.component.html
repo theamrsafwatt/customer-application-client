@@ -39,8 +39,9 @@
                 <H6>
                   Phone Number State
                 </H6>
-                <select class="form-select" formControlName="isValidPhoneNumber" (change)="applyFilter(true)">
-                  <option selected="selected" value="">Select state</option>
+                <select class="form-select" formControlName="isValidPhoneNumber" (change)="applyFilter(true)" >
+                  <option value="" disabled>Select state</option>
+                  <option value="" selected>All</option>
                   <option *ngFor="let option of stateList" [value]="option.value">
                     {{option.state}}
                   </option>

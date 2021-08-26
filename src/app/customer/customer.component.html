@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row custom-display">
+    <div class="mat-elevation-z8">
+      <form [formGroup]="filterForm">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="customerName">
+            <mat-header-cell *matHeaderCellDef>
+              <div style="display:flex; flex-direction:column;">
+                <H6>
+                  Customer Name
+                </H6>
+                <input mdbInput type="text" class="form-control" placeholder="Customer Name Filter"
+                  formControlName="customerName" (keyup.enter)="applyFilter(true)">
+              </div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.name}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="phoneNumber">
+            <mat-header-cell *matHeaderCellDef>
+              <div style="display:flex; flex-direction:column;">
+                <H6>
+                  Phone Number
+                </H6>
+                <input mdbInput type="text" class="form-control" placeholder="Phone Number Filter"
+                  formControlName="phoneNumber" (keyup.enter)="applyFilter(true)">
+              </div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.phoneNumber}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="isValidPhoneNumber">
+            <mat-header-cell *matHeaderCellDef>
+              <div style="display:flex; flex-direction:column;">
+                <H6>
+                  Phone Number State
+                </H6>
+                <select class="form-select" formControlName="isValidPhoneNumber" (change)="applyFilter(true)">
+                  <option selected="selected" value="">Select state</option>
+                  <option *ngFor="let option of stateList" [value]="option.value">
+                    {{option.state}}
+                  </option>
+                </select>
+              </div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.phoneNumberState}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="countryName">
+            <mat-header-cell *matHeaderCellDef>
+              <div style="display:flex; flex-direction:column;">
+                <H6>
+                  Country
+                </H6>
+                <input mdbInput type="text" class="form-control" placeholder="Country Filter"
+                  formControlName="countryName" (keyup.enter)="applyFilter(true)">
+              </div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.country.name}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="countryCode">
+            <mat-header-cell *matHeaderCellDef>
+              <div style="display:flex; flex-direction:column;">
+                <H6>
+                  Country Code
+                </H6>
+                <input mdbInput type="text" class="form-control" placeholder="Country Code Filter"
+                  formControlName="countryCode" (keyup.enter)="applyFilter(true)">
+              </div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.country.code}}
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator class="pagination" [style]="style" #pagi id="pagi" [length]="lengthData" [pageSize]="pageSize"
+          [pageSizeOptions]="[5, 10, 25, 100]" (page)="getServerData($event)">
+        </mat-paginator>
+      </form>
+    </div>
+  </div>
+</div>

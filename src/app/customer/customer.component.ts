@@ -122,7 +122,6 @@ export class CustomerComponent implements OnInit {
     for (let key in prepared) {
       qs += key + '=' + prepared[key] + '&';
     }
-    console.log(qs)
     return qs
   }
 

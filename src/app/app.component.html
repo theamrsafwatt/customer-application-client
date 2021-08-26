@@ -1,12 +1,17 @@
 <div class="container">
-  <nav class="navbar navbar-expand-sm  navbar-nav">
-    <h2 class="d-flex justify-content-center">Customer Management Portal</h2>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <button routerLink="/" class="m-1 btn btn-light btn-outline-primary" Button>Home</button>
-        <button routerLink="customer" class="m-1 btn btn-light btn-outline-primary" Button>Customers</button>
-      </li>
-    </ul>
-  </nav>
+  <mat-toolbar>
+    <span>Welcome to Customer Management Portal</span>
+    <span class="toolbar-spacer"></span>
+    <button class="m-1 btn btn-light btn-outline-primary" *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()"
+      Button>Login
+    </button>
+    <button routerLink="/" class="m-1 btn btn-light btn-outline-primary" *ngIf="isAuthenticated" Button>Home</button>
+    <button routerLink="customer" class="m-1 btn btn-light btn-outline-primary" *ngIf="isAuthenticated"
+      Button>Customers</button>
+    <button class="m-1 btn btn-light btn-outline-primary" *ngIf="isAuthenticated" (click)="oktaAuth.logout()"
+      Button>Logout
+    </button>
+  </mat-toolbar>
+  <br>
   <router-outlet></router-outlet>
 </div>
